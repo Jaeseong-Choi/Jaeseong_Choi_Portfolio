@@ -132,3 +132,111 @@ header,
 .contact-links a:hover {
     text-decoration: underline;
 }
+
+/* 네비게이션 스타일 */
+nav {
+    background-color: #333;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin: 0 1rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ddd;
+}
+
+/* 블로그 목록 페이지 스타일 */
+.blog-list {
+    padding: 2rem;
+}
+
+.post-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+}
+
+.post-card h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.post-card .date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.post-card .summary {
+    margin: 1rem 0;
+}
+
+.post-card a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.post-card a:hover {
+    text-decoration: underline;
+}
+
+/* 글쓰기 페이지 스타일 */
+.blog-write {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+button[type='submit'] {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button[type='submit']:hover {
+    background-color: #0052a3;
+}

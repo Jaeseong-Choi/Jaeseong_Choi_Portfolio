@@ -1,24 +1,37 @@
 import React from 'react';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Strengths from './components/Strengths';
-import Contact from './components/Contact';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+
+// 페이지 컴포넌트들을 임포트합니다
+import Home from './pages/Home';
+import BlogList from './pages/BlogList';
+import BlogWrite from './pages/BlogWrite';
 
 function App() {
     return (
-        <div>
-            <Hero />
+        <Router>
+            <div className="App">
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">홈</Link>
+                        </li>
+                        <li>
+                            <Link to="/blog">블로그 목록</Link>
+                        </li>
+                        <li>
+                            <Link to="/write">글쓰기</Link>
+                        </li>
+                    </ul>
+                </nav>
 
-            <About />
-
-            <Skills />
-
-            <Strengths />
-
-            <Contact />
-        </div>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/blog" element={<BlogList />} />
+                    <Route path="/write" element={<BlogWrite />} />
+                </Routes>
+            </div>
+        </Router>
     );
 }
 
