@@ -3,31 +3,39 @@ import api from './api';
 // 회원가입
 export const register = async (username, email, password) => {
     try {
-        const res = await api.post('/dj/registration/', {
+        const response = await api.post('/dj/registration/', {
             username,
             email,
             password,
         });
-        return res.data;
-    } catch (err) {
-        console.error('회원가입 실패:', err);
-        throw err;
+        return response.data;
+    } catch (error) {
+        console.error('회원가입 에러:', error.response?.data || error.message);
+        throw error;
     }
 };
 
 // 로그인
 export const login = async (username, password) => {
     try {
-        const res = await api.post('/dj/login/', {
+        const response = await api.post('/dj/login/', {
             username,
             password,
         });
-
-        // 토큰 저장
-        localStorage.setItem('token', res.data.access);
-        return res.data;
-    } catch (err) {
-        console.error('로그인 실패:', err);
-        throw err;
+        return response.data;
+    } catch (error) {
+        console.error('로그인 에러:', error.response?.data || error.message);
+        throw error;
     }
+};
+
+// 로그아웃
+export const logout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+};
+
+// 현재 로그인 상태 확인
+export const isAuthenticated = () => {
+    return !!localStorage.getItem('token');
 };
