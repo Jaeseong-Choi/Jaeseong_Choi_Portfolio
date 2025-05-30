@@ -3,36 +3,41 @@ import api from './api';
 // 회원가입
 export const register = async (username, email, password) => {
     try {
-        const response = await api.post('/dj/registration/', {
+        const res = await api.post('/dj/registration/', {
             username,
             email,
             password,
         });
-        return response.data;
-    } catch (error) {
-        console.error('회원가입 에러:', error.response?.data || error.message);
-        throw error;
+        return res.data;
+    } catch (err) {
+        throw err;
     }
 };
 
 // 로그인
 export const login = async (username, password) => {
     try {
-        const response = await api.post('/dj/login/', {
+        const res = await api.post('/dj/login/', {
             username,
             password,
         });
-        return response.data;
-    } catch (error) {
-        console.error('로그인 에러:', error.response?.data || error.message);
-        throw error;
+        if (res.data && res.data.access) {
+            localStorage.setItem('token', res.data.access);
+        }
+        return res.data;
+    } catch (err) {
+        throw err;
     }
 };
 
 // 로그아웃
-export const logout = () => {
-    localStorage.removeItem('token');
-    window.location.href = '/login';
+export const logout = async () => {
+    try {
+        await api.post('/dj/logout/');
+        localStorage.removeItem('token');
+    } catch (err) {
+        localStorage.removeItem('token');
+    }
 };
 
 // 현재 로그인 상태 확인
