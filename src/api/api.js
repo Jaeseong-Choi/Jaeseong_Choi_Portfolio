@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://hufs-mutsa-13th.store/',
+    baseURL: 'https://hufs-meotsa-13th.store/',
     headers: {
         'Content-Type': 'application/json',
     },

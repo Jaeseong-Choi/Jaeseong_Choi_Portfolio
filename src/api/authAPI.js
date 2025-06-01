@@ -1,12 +1,16 @@
 import api from './api';
 
 // 회원가입
-export const register = async (username, email, password) => {
+export const register = async (username, email, password1, password2, nickname, university, location) => {
     try {
         const res = await api.post('/dj/registration/', {
             username,
             email,
-            password,
+            password1,
+            password2,
+            nickname,
+            university,
+            location,
         });
         return res.data;
     } catch (err) {

@@ -5,27 +5,32 @@ import { register } from '../api/authAPI';
 function Register() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [password1, setPassword1] = useState('');
+    const [password2, setPassword2] = useState('');
+    const [nickname, setNickname] = useState('');
+    const [university, setUniversity] = useState('');
+    const [location, setLocation] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
-        if (password !== passwordConfirm) {
+        if (password1 !== password2) {
             setError('비밀번호가 일치하지 않습니다.');
             return;
         }
-
         try {
-            await register(username, email, password);
+            await register(username, email, password1, password2, nickname, university, location);
             alert('회원가입이 완료되었습니다! 로그인해주세요.');
             navigate('/login');
         } catch (err) {
-            console.error('회원가입 실패:', err);
-            setError(err.response?.data?.message || '회원가입 중 오류가 발생했습니다.');
+            if (err.response && err.response.data) {
+                const messages = Object.values(err.response.data).flat().join(' ');
+                setError(messages);
+            } else {
+                setError('회원가입 중 오류가 발생했습니다.');
+            }
         }
     };
 
@@ -51,18 +56,42 @@ function Register() {
                 />
                 <input
                     className="auth-input"
+                    type="text"
+                    placeholder="닉네임"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    required
+                />
+                <input
+                    className="auth-input"
+                    type="text"
+                    placeholder="학교"
+                    value={university}
+                    onChange={(e) => setUniversity(e.target.value)}
+                    required
+                />
+                <input
+                    className="auth-input"
+                    type="text"
+                    placeholder="지역"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    required
+                />
+                <input
+                    className="auth-input"
                     type="password"
                     placeholder="비밀번호"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={password1}
+                    onChange={(e) => setPassword1(e.target.value)}
                     required
                 />
                 <input
                     className="auth-input"
                     type="password"
                     placeholder="비밀번호 확인"
-                    value={passwordConfirm}
-                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                    value={password2}
+                    onChange={(e) => setPassword2(e.target.value)}
                     required
                 />
                 {error && <div className="auth-error">{error}</div>}

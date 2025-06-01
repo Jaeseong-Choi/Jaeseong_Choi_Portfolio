@@ -2,7 +2,7 @@ import api from './api';
 
 // 인증 없이 사용할 axios 인스턴스 생성
 const publicApi = api.create({
-    baseURL: 'https://hufs-mutsa-13th.store/',
+    baseURL: 'https://hufs-meotsa-13th.store/',
     headers: {
         'Content-Type': 'application/json',
     },
